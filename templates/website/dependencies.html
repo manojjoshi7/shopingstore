@@ -1,0 +1,83 @@
+{% load static %}
+<html>
+    <head>
+        <title>
+            ProjectGurukul Online Shopping Project
+        </title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"  crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}"  crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-icons.css' %}">
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}"  crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/jquery.dataTables.css' %}"  crossorigin="anonymous">
+        
+    </head>
+<body>
+    <div class="modal" tabindex="-1" role="dialog" id="messagePopUp">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+           <div class="modal-body">
+              <p id="message"></p>
+            </div>
+            <div class="modal-footer d-none" id="popupFooter">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="dismiss">No</button>
+              <button type="button" class="btn btn-primary" id="allow">Yes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+              
+        {% include 'website/navbar.html' %}
+           {% block content %}   
+        {% endblock %}
+        <br>
+       
+     <script src="{% static 'js/jquery-3.6.0.min.js' %}"  crossorigin="anonymous"></script>
+     <script src="{% static 'js/popper.min.js' %}" crossorigin="anonymous"></script>
+     <script src="{% static 'js/bootstrap.min.js' %}" crossorigin="anonymous"></script>
+     <script src="{% static 'js/jquery.dataTables.js' %}" crossorigin="anonymous"></script>
+     <script src="{% static 'js/common.js' %}" crossorigin="anonymous"></script>
+     <script>
+    
+    grecaptcha.ready(function() {
+
+      var recaptcha_public_key="{{ recaptcha_public_key }}";
+      grecaptcha.execute(recaptcha_public_key, {action: 'create_comment'}).then(function(token) {
+          $('.cum-form').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+
+      });
+    });
+      //var recaptcha_public_key="{{ recaptcha_public_key }}";
+      //alert($("#key").val())
+     // when form is submit
+  /*
+  $('#editemp').submit(function() {
+      // we stoped it
+      event.preventDefault();
+     
+      var email = $('#email').val();
+      var comment = $("#comment").val();
+      // needs for recaptacha ready
+      grecaptcha.ready(function() {
+          // do request for recaptcha token
+          // response is promise with passed token
+          var recaptcha_public_key="{{ recaptcha_public_key }}";
+          alert(recaptcha_public_key)
+          grecaptcha.execute(recaptcha_public_key, {action: 'create_comment'}).then(function(token) {
+              // add token to form
+              $('#editemp').prepend('<input type="hidden" name="g-recaptcha-response" value="' + token + '">');
+                  /*$.post("form.php",{email: email, comment: comment, token: token}, function(result) {
+                          console.log(result);
+                          if(result.success) {
+                                  alert('Thanks for posting comment.')
+                          } else {
+                                  alert('You are spammer ! Get the @$%K out.')
+                          }
+                  });
+                  */
+        //  });;
+      //});
+ //});*/
+
+ </script>
+</body>
+</html>

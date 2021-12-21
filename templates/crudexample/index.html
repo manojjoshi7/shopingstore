@@ -1,0 +1,64 @@
+{% extends 'website/dependencies.html' %}
+ 
+{% block content %}
+{% for field in form %}
+    {{ field.errors }}
+{% endfor %}
+
+
+<div class="container jumbotron">
+    <p class="signup">Enter Details</p>
+    <form method="POST" class="post-form" action="/employee/emp" id="addEmpForm">  
+        {% csrf_token %}  
+    <div class="container">  
+    <br>  
+    <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Employee Id:</label>  
+    <div class="col-sm-4">  
+      {{ form.eid }}  
+    </div>  
+  </div>  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Employee Name:</label>  
+    <div class="col-sm-4">  
+      {{ form.ename }}  
+    </div>  
+  </div>  
+    <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Employee Email:</label>  
+    <div class="col-sm-4">  
+      {{ form.email }}  
+    </div>  
+  </div>  
+    <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Employee Contact:</label>  
+    <div class="col-sm-4">  
+      {{ form.econtact }}  
+    </div>  
+  </div>
+  <!--<div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Employee Contact:</label>  
+    <div class="col-sm-4">  
+      {{ form.captcha }}  
+    </div>  
+  </div>-->  
+    <div class="form-group row">  
+      <label class="col-sm-1 col-form-label"></label>  
+      <div class="col-sm-4">
+        &nbsp;  
+      </div>  
+      <div class="col-sm-4">
+        <script src='https://www.google.com/recaptcha/api.js?render={{ recaptcha_public_key }}'></script>  
+         <button type="submit" class="btn subbtn">Submit</button>  
+      </div>
+      <div class="col-sm-4">
+        &nbsp;  
+      </div>  
+  </div> 
+  <div class="overlay"></div> 
+    </div>  
+</form>  
+
+</div>
+
+{% endblock %}

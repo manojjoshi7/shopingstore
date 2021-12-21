@@ -1,0 +1,51 @@
+{% extends 'website/dependencies.html' %}
+{% load static%}
+{% block content %}
+{% if messages %}
+ <ul class="message list-group mt-4">
+    {% for message in messages %}
+    <li {% if message.tags == 'success'  %} class="alert-success" {% elif message.tags == 'error' %}  class="alert-danger" {% endif %}>
+        {{ message }}
+    </li>
+   {% endfor %}
+</ul>
+{% endif %}
+<div class="container jumbotron">
+    <p class="signup">Sign In</p>
+    <form method="POST" action="" class="cum-form">
+        {% csrf_token %}
+        <div class="row mt-4">
+            <div class="col-md-2">    
+             <lable>Enter User Name</lable>
+            </div>
+            <div class="col-md-10 pull-left">
+                <input type="text" name="username" placeholder="Username...">   
+                <span class="padding-xs">
+                  {{ form.errors.username }}
+                </span>
+            </div>
+         </div>
+         <div class="row mt-4">
+            <div class="col-md-2">    
+               <lable>Enter Password</lable>
+            </div>
+            <div class="col-md-10 pull-left">
+                <input type="password" name="password" placeholder="Password..." ></p>
+                <span class="padding-xs">
+                  {{ form.errors.password }}
+                </span>
+            </div>
+         </div>
+        <div class="row mt-4"> 
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <script src='https://www.google.com/recaptcha/api.js?render={{ recaptcha_public_key }}'></script>
+            <input class="btn subbtn" type="submit" value="Login">
+        </div>
+        <div class="col-md-4"></div>
+        <p>Do not have an account  <a href='{% url 'register' %}'>Register</a></p>
+        </div>
+        
+    </form>
+</div>
+{% endblock %}

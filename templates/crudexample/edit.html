@@ -1,0 +1,72 @@
+{% extends 'website/dependencies.html' %}
+ 
+{% block content %}
+<div class="container jumbotron">
+    <p class="signup">Update Details</p>  
+    <form method="POST" class="post-form cum-form" action="/employee/update/{{ employee.id }}" id='editemp'>  
+    {% csrf_token %}  
+<div class="container">  
+<br>  
+ 
+<div class="form-group row">  
+<label class="col-sm-2 col-form-label">Employee Id:</label>  
+<div class="col-sm-4">  
+    <input type="text" name="eid" id="id_eid" required maxlength="20" value="{{ employee.eid }}" {% if form.eid.errors %} class="has-emp-error" {% endif %}/>  
+    {% if form.eid.errors %}
+    {% for error in form.eid.errors %}
+    <p class='has-error'><span> {{ error|escape }}</span></p>
+    {% endfor %}
+    {% endif %}
+</div>  
+</div>  
+<div class="form-group row">  
+<label class="col-sm-2 col-form-label">Employee Name:</label>  
+<div class="col-sm-4">  
+    <input type="text" name="ename" id="id_ename" required maxlength="100" value="{{ employee.ename }}" {% if form.ename.errors %} class="has-emp-error" {% endif %}/> 
+    {% if form.ename.errors %}
+    {% for error in form.ename.errors %}
+    <p class='has-error'><span> {{ error|escape }}</span></p>
+    {% endfor %}
+    {% endif %} 
+</div>  
+</div>  
+<div class="form-group row">  
+<label class="col-sm-2 col-form-label">Employee Email:</label>  
+<div class="col-sm-4">  
+    <input type="email" name="email" id="id_eemail" required maxlength="254" value="{{ employee.email }}" {% if form.email.errors %} class="has-emp-error" {% endif %}/>  
+    {% if form.email.errors %}
+    {% for error in form.email.errors %}
+    <p class='has-error'><span> {{ error|escape }}</span></p>
+    {% endfor %}
+    {% endif %} 
+</div>  
+</div>  
+<div class="form-group row">  
+<label class="col-sm-2 col-form-label">Employee Contact:</label>  
+<div class="col-sm-4">  
+    <input type="text" name="econtact" id="id_econtact" required maxlength="15" value="{{ employee.econtact }}" {% if form.econtact.errors %} class="has-emp-error" {% endif %}/>  
+    {% if form.econtact.errors %}
+    {% for error in form.econtact.errors %}
+    <p class='has-error'><span> {{ error|escape }}</span></p>
+    {% endfor %}
+    {% endif %} 
+</div>  
+</div> 
+<div class="form-group row">  
+    <label class="col-sm-2 col-form-label">&nbsp;</label>  
+     <div class="col-sm-4"> 
+      <script src='https://www.google.com/recaptcha/api.js?render={{ recaptcha_public_key }}'></script>
+       
+     </div>  
+    </div>   
+<div class="form-group row ml-5">  
+    <div class="col-sm-4">&nbsp;</div>  
+    <div class="col-sm-4">  
+      <button type="submit" class="btn subbtn">Update</button>  
+    </div>
+    <div class="col-sm-4">&nbsp;</div>  
+</div>
+</div>  
+</form>  
+</div>
+{% endblock %}

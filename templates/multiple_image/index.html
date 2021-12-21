@@ -1,0 +1,29 @@
+{% extends 'website/dependencies.html' %}
+{% block content %}
+<div class="container-fluid p-2">
+    {% if messages %}
+    <ul class="message list-group">
+       {% for message in messages %}
+      <li {% if message.tags == 'success'  %} class="alert-success list-group-item" {% elif message.tags == 'error' %}  class="alert-danger list-group-item" {% endif %}>
+         {{ message }}
+      </li>
+      {% endfor %}
+    </ul>
+ {% endif %}
+    <br/>
+    <div class="container mt-4">
+       
+       <form action="" method="post" enctype="multipart/form-data">
+           {% csrf_token %}
+           <input type="file" name="images"  multiple>
+           <button>Upload</button>
+      </form>
+    </div> 
+    <hr>
+    {% for img in images %}
+    {{ img.img.url }}
+         <img src="{{ img.img }}" alt="Image" class="img-thumbnail">
+    {% endfor %}
+   
+</div>
+{% endblock %}

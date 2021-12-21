@@ -1,0 +1,66 @@
+{% extends 'website/dependencies.html' %}
+{% load static%}
+{% block content %}
+{% if messages %}
+ <ul class="message list-group mt-4">
+    {% for message in messages %}
+    <li {% if message.tags == 'success'  %} class="alert-success" {% elif message.tags == 'error' %}  class="alert-danger" {% endif %}>
+        {{ message }}
+    </li>
+   {% endfor %}
+</ul>
+{% endif %}
+<div class="container jumbotron">
+    <p class="signup">Sign Up</p>
+    <form method="POST" action="" class="cum-form">
+
+        {% csrf_token %}
+        
+        {% for field in form %}
+        <div class="row mt-4">
+            <div class="col-md-2">    
+             {{ field.label_tag }}
+             {% if field.help_text %}
+               <!--<sup>{{ field.help_text }}</sup>-->
+             {% endif %}
+             
+            </div><div class="col-md-10 pull-left">
+              {{ field }}
+              <span class="padding-xs">
+                {{ field.errors }}
+               </span>
+            </div>
+         </div>
+        {% endfor %}
+       <!--{{form.as_p}}--> 
+       <!--{{customerform.as_p}}-->
+         {% for cusField in  customerform %}
+         <div class="row mt-4">
+            <div class="col-md-2">    
+                {{ cusField.label_tag }}
+                {% if cusField.help_text %}
+                  <!--<sup>{{ field.help_text }}</sup>-->
+                {% endif %}
+                </div><div class="col-md-10 pull-left">
+                 {{ cusField }}
+                 <span>
+                    {{ cusField.errors }}
+                 </span>
+               </div>
+         </div>
+         {% endfor %}
+         <div class="row mt-4">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+              <script src='https://www.google.com/recaptcha/api.js?render={{ recaptcha_public_key }}'></script>
+                <input class="btn subbtn" type="submit" value="Register Account">
+            </div>
+            <div class="col-md-4">
+            </div>
+
+         </div>
+         
+    </form>
+</div>
+{% endblock %}
